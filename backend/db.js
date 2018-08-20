@@ -20,6 +20,7 @@ function findAll(config, callback){
         .project(config.query)
         .skip(config.skip)
         .limit(config.limit)
+        .sort({ "_id":-1 })
         .toArray(callback)
 }
 
