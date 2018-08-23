@@ -71,7 +71,7 @@ export default class Lista extends React.Component {
                 <div onLoad={this.componentDidMount.bind(this)} className="media imprimir" >
                     <img className="align-self-start mr-3" 
                     src={`${URL}/fotos/${this.props.match.params.id}.jpg`} 
-                    height="144" width="176"
+                    //height="144" width="176"
                     alt="Foto" />
                     <div className="media-body">
                         <h3 className="mt-0">Dados do aluno</h3>
