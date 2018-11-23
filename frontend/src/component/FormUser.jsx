@@ -46,13 +46,13 @@ export default props => {
                 {GerarInputName('text', 'col-md-3', "órgão_emissor")}
             </div>
 
-            <div className="form-row">
+            {/* <div className="form-row">
                 {GerarInputName('text', 'col-md-3', "número_certidão_de_nascimento")}
                 {GerarInputName('text', 'col-md-3', "termo")}
                 {GerarInputName('text', 'col-md-2', "folha")}
                 {GerarInputName('text', 'col-md-2', "livro")}
                 {GerarInputName('date', 'col-md-2', "data_de_emissão")}
-            </div>
+            </div> */}
 
             <div className="form-row">
                 {GerarInputName('text', 'col-md-3', "nome_do_pai")}

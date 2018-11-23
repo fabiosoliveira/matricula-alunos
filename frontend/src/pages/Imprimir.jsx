@@ -64,6 +64,33 @@ export default class Lista extends React.Component {
         )
     }
 
+    tabelaSerie(){
+        let ano = new Date().getFullYear()
+
+        return(
+            <table className="tbSerie">
+                <thead>
+                    <tr>
+                        <th>ANO</th>
+                        <th>TURMA</th>
+                        <th>TURNO</th>
+                        <th>ASSINATURA DO RESPONSÁVEL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                    <tr><td>{ano++}</td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        )
+    }
+
     render() {
         return (
             <div className="container">
@@ -137,7 +164,7 @@ export default class Lista extends React.Component {
                                     <b>CARTÃO SUS:</b> {this.state.aluno.documento_SUS}
                                 </div>
                             </div>
-                            <div className="row">
+                            {/* <div className="row">
                                 <div className="col-md">
                                     <b>CERTIDÃO NASCIMENTO:</b> {this.state.aluno.número_certidão_de_nascimento}
                                 </div>
@@ -157,7 +184,7 @@ export default class Lista extends React.Component {
                                 <div className="col-md">
                                     <b>D. EMISSÃO:</b> {this.state.aluno.data_de_emissão}
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="row">
                                 <div className="col-md">
                                     <b>PAI:</b> {this.state.aluno.nome_do_pai}
@@ -174,7 +201,7 @@ export default class Lista extends React.Component {
                                     <b>RG/CPF:</b> {this.state.aluno.RG_CPF_da_mãe}
                                 </div>
                             </div>
-                            <div className="row">
+                            {/* <div className="row">
                                 <div className="col-md">
                                     <b>TURNO:</b> {this.state.aluno.turno}
                                 </div>
@@ -183,7 +210,8 @@ export default class Lista extends React.Component {
                                                     `EIXO ${this.state.aluno.serie} ${this.state.aluno.turma}`:
                                                     `${this.state.aluno.serie}ª SÉRIE ${this.state.aluno.turma}`}
                                 </div>
-                            </div>
+                            </div> */}
+                            
                             <div className="row">
                                 <div className="col-md">
                                     <b>UTILIZA TRANSPORTE ESCOLAR:</b> 
@@ -220,10 +248,15 @@ export default class Lista extends React.Component {
                                     <br /> {this.state.aluno.procedimento_escolar}
                                 </div>
                             </div>
+                            <div className="row">
+                                <div className="col-md">
+                                    {this.tabelaSerie()}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {this.footer()}
+                {/* {this.footer()} */}
             </div>
             )
     }
