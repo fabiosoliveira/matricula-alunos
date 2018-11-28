@@ -4,6 +4,11 @@ const app = express()
 const cors = require("cors")
 global.db = require('./db')
 const porta = 3003
+let host = 'localhost'
+
+if (process.env.NODE_ENV == "production") {
+    host = '192.168.44.101'
+}
 
 // meaduler
 app.use(cors())
@@ -11,7 +16,7 @@ app.use(express.static('./public/')) // servir arquivos estaticos
 app.use(bodyParser.urlencoded({ extended: true })) // ler dados submit de formulário
 app.use(bodyParser.json()) // ler dados vindo em formato json
 app.use(function (req, res, next) { 
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000') // Website you wish to allow to connect 
+    res.setHeader('Access-Control-Allow-Origin', `http://${host}:3000`) // Website you wish to allow to connect 
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE') // Request methods you wish to allow 
     //res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type'); // Request headers you wish to allow 
     //res.setHeader('Access-Control-Allow-Credentials', true); // Set to true if you need the website to include cookies in the requests sent // to the API (eg in case you use sessions) 
