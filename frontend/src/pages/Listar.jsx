@@ -1,7 +1,9 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 import URL from '../util/URL'
+import ModalExcluir from  '../component/ModalExcluir'
 
 const LIMIT = 15
 
@@ -13,7 +15,8 @@ export default class Listar extends React.Component {
             status: 0,
             pages: [],
             page: 1,
-            totalPage: 0
+            totalPage: 0,
+            excluir: ""
         }
     }
     
@@ -88,6 +91,35 @@ export default class Listar extends React.Component {
         )
     }
 
+    excluir(event){
+        event.preventDefault()
+
+        if (event.target.name === "salvar"){
+            const param = this.state.excluir.split("/").pop()
+            const URL_TO_FETCH = `${URL}/alunos/${param}`
+
+            fetch(URL_TO_FETCH , { method: 'delete' })
+                .then(resp => resp.json())
+                .then(data => { 
+                   const lista = this.getUpdateList(data)
+                   this.setState({ lista })
+                })
+                .catch(function(err) { 
+                    console.error(err)
+            })
+        }
+        this.setState({ excluir: '' })
+    }
+
+    getUpdateList(obj) {
+        return this.state.lista.filter(u => u._id !== obj.id)
+    }
+
+    prepararParaExcluir(event){
+        event.preventDefault()
+        this.setState({ excluir: event.target.href})
+    }
+
     render() {
 
         if (this.props.match.params.search !== this.state.status){
@@ -97,6 +129,12 @@ export default class Listar extends React.Component {
         
         return (
             <section className='container'>
+
+            <ModalExcluir id="modalExcluir" titulo="Confirmar Exclusão" 
+                excluir={e => this.excluir(e)}>
+                Este contato está prestes a ser excluido    
+            </ModalExcluir>
+
             <table onLoad={this.componentDidMount.bind(this)} className="table table-hover table-sm">
                 <thead className="thead-dark">
                     <tr>
@@ -122,7 +160,11 @@ export default class Listar extends React.Component {
                             <td>{element.tipo === 'EIXO'? 
                                 `EIXO ${element.serie} ${element.turma}`:
                                 `${element.serie}ª SÉRIE ${element.turma}`}</td>
-                            <td><Link to={`/editar/${element._id}`}>edit.</Link>| 
+                            <td><Link to={`/editar/${element._id}`}>edit.</Link>|
+                                <a href={`/excluir/${element._id}`} data-toggle="modal" data-target="#modalExcluir"
+                                    onClick={e => this.prepararParaExcluir(e)}>
+                                    excluir
+                                </a>|
                                 <Link to={`/addfoto/${element._id}`}>foto</Link>|
                                 <Link to={`/imprimir/${element._id}`}>impr.</Link></td>
                         </tr>
